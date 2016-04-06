@@ -1,0 +1,72 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="my-slider">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <neon-animated-pages entry-animation=[[entry-animation]] exit-animation=[[exit-animation]] selected="[[selected]]">
+      <template is="dom-repeat" items="{{slides}}">
+          <neon-animatable>
+            <content select="[[selected]]"></content>
+            <!-- [[slides]] -->
+          </neon-animatable>
+      </template>
+    </neon-animated-pages>
+
+    <div id="prev"></div>
+    <div id="next"></div>
+
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'my-slider',
+
+      properties: {
+        selected: {
+          type: Number,
+          value: 0,
+          // observer: '_changeSelected'
+          notify:true
+        },
+        entryAnimation: {
+          type: String,
+          value: 'slide-from-bottom-animation'
+        },
+        exitAnimation: {
+          type: String,
+          value: 'slide-up-animation'
+        },
+        slides: {
+          type: Array,
+          value: function() {
+            return [];
+          }
+        }
+      },
+      listeners: {
+        'wheel': 'handleWheel'
+      },
+      _changeSelected: function(dest) {
+        page('/pagina/' + this.selected); //evento que se escucha en app.js
+      }
+    });
+  })();
+  </script>
+</dom-module>
