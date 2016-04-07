@@ -10,6 +10,8 @@
   <link rel="import" href="/elements/elements.html">
   <link rel="import" href="/styles/shared-styles.html">
   <link rel="icon" href="/images/favicon.ico">
+  <link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Coming+Soon' rel='stylesheet' type='text/css'>
 
   <style>
     my-dots {
@@ -18,14 +20,18 @@
       right: 40px;
       z-index: 4;
     }
-    #prev, #next {
+
+    #prev,
+    #next {
       position: absolute;
       z-index: 4;
     }
+
     #prev {
       bottom: 40px;
       left: 40px;
     }
+
     #next {
       bottom: 60px;
       left: 40px;
@@ -36,7 +42,7 @@
 <body unresolved>
   <template is="dom-bind" id="app">
     <firebase-collection order-by-key location="https://brilliant-inferno-8421.firebaseio.com/images" data="{{slides}}"></firebase-collection>
-    <neon-animated-pages entry-animation=[[entryAnimation]] exit-animation=[[exitAnimation]] selected="[[selected]]">
+    <neon-animated-pages id="slider" entry-animation=[[entryAnimation]] exit-animation=[[exitAnimation]] selected="[[selected]]" on-track="_track">
       <template is="dom-repeat" items="[[slides]]" as="slide">
         <neon-animatable>
           <img src="[[slide.src]]" alt="">
@@ -53,6 +59,7 @@
   <script>
     var app = document.querySelector('#app');
     var body = document.querySelector('body');
+    var slider = document.querySelector('#slider');
     body.addEventListener('my-dots-selected-changed', function(e) {
       console.log('listener for selected ', e);
       var values = e.detail;
@@ -65,9 +72,11 @@
         'slide-right-animation';
       app.selected = values.newValue;
     });
+
     app.selected = 0;
     app.entryAnimation = 'slide-from-right-animation';
     app.exitAnimation = 'slide-left-animation';
+
     app._prev = function() {
       this.entryAnimation = 'slide-from-left-animation';
       this.exitAnimation = 'slide-right-animation';
@@ -78,6 +87,20 @@
       this.exitAnimation = 'slide-left-animation';
       var last = app.slides.length - 1;
       this.selected = this.selected === last ? last : (this.selected + 1);
+    }
+    app._track = function(e) {
+      console.log('track ', e);
+      e.preventDefault();
+      var started = e.detail.state === 'start';
+      var goRight = e.detail.dx < 0;
+      if (started !== undefined) {
+        console.log('started ', started);
+        if (goRight) {
+          this._next();
+        }else {
+          this._prev();
+        }
+      }
     }
   </script>
 </body>
