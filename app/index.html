@@ -41,6 +41,7 @@
 
 <body unresolved>
   <template is="dom-bind" id="app">
+    <paper-spinner id="spinner" alt="Loading slides" active></paper-spinner>
     <firebase-collection order-by-key location="https://brilliant-inferno-8421.firebaseio.com/images" data="{{slides}}"></firebase-collection>
     <neon-animated-pages id="slider" entry-animation=[[entryAnimation]] exit-animation=[[exitAnimation]] selected="[[selected]]" on-track="_track">
       <template is="dom-repeat" items="[[slides]]" as="slide">
@@ -53,13 +54,14 @@
     <button id="next" on-tap="_next">next</button>
     <my-dots items="[[slides]]" selected=[[selected]]></my-dots>
 
+
   </template>
 
   <!-- <script src="scripts/app.js"> -->
   <script>
     var app = document.querySelector('#app');
     var body = document.querySelector('body');
-    var slider = document.querySelector('#slider');
+
     body.addEventListener('my-dots-selected-changed', function(e) {
       console.log('listener for selected ', e);
       var values = e.detail;
@@ -71,6 +73,17 @@
         'slide-left-animation' :
         'slide-right-animation';
       app.selected = values.newValue;
+    });
+
+    var mutationObserverCallback = function () {
+      var spinner = document.querySelector('#spinner');
+      spinner.removeAttribute('active');
+    }
+
+    document.addEventListener('WebComponentsReady', function () {
+      var slider = document.querySelector('#slider');
+      var mutationObserver = new MutationObserver(mutationObserverCallback);
+      mutationObserver.observe(slider, {childList: true });
     });
 
     app.selected = 0;
