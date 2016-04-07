@@ -31,17 +31,28 @@
     </neon-animated-pages>
     <button id="prev" on-tap="_prev">previous</button>
     <button id="next" on-tap="_next">next</button>
-    <my-dots items="[[slides]]" selected={{selected}}></my-dots>
+    <my-dots items="[[slides]]" selected=[[selected]]></my-dots>
 
   </template>
 
   <!-- <script src="scripts/app.js"> -->
   <script>
     var app = document.querySelector('#app');
-    app.addEventListener('selected-changed', function () {
-      console.log('listener for selected ', app.selected);
+    document.addEventListener('my-dots-selected-changed', function(e) {
+      console.log('listener for selected ', e);
+      var values = e.detail;
+      var goRight = values.newValue > values.oldValue;
+      app.entryAnimation = goRight ?
+        'slide-from-right-animation' :
+        'slide-from-left-animation'
+      app.exitAnimation = goRight ?
+        'slide-left-animation' :
+        'slide-right-animation'
+      app.selected = values.newValue;
     });
     app.selected = 0;
+    app.entryAnimation = 'slide-from-right-animation';
+    app.exitAnimation = 'slide-left-animation';
     app._prev = function() {
       this.entryAnimation = 'slide-from-left-animation';
       this.exitAnimation = 'slide-right-animation';

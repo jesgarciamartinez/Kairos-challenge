@@ -9,11 +9,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<!-- <link rel="import" href="../../bower_components/iron-selector/iron-selector.html"> -->
+
 
 <dom-module id="my-dots">
   <template>
     <style>
+
       :host {
+        @apply(--my-dots);
+      }
+
+      iron-selector {
         display: flex;
         flex-flow: row;
       }
@@ -29,11 +36,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         border-radius: 50%;
         background-color: white;
       }
+
+      .iron-selected {
+        background-color: red;
+      }
     </style>
 
-    <template is="dom-repeat" items="{{items}}">
-      <div on-tap="_handleTap"></div>
-    </template>
+    <iron-selector selected="[[selected]]">
+      <template is="dom-repeat" items="{{items}}">
+        <div on-tap="_handleTap"></div>
+      </template>
+    </iron-selector>
 
   </template>
   <script>
@@ -58,12 +71,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
 
         _handleTap: function(e) {
+          var oldSelected = this.selected;
           var item = e.model.item;
           var selectedIndex = this.items.indexOf(item);
-          if (this.selected !== selectedIndex) {
-            this.set('selected', selectedIndex)
+          if (oldSelected !== selectedIndex) {
+            this.set('selected', selectedIndex);
           }
-          console.log('_handleTap ', this.selected);
+          this.fire('my-dots-selected-changed', {oldValue: oldSelected, newValue: selectedIndex});
         }
 
       });
