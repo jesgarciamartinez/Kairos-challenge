@@ -5,16 +5,30 @@
 <head>
   <meta charset="utf-8">
   <title>Kairos Challenge</title>
-  <link rel="stylesheet" href="styles/main.css">
-  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-  <link rel="import" href="elements/elements.html">
-  <style is="custom-style" include="shared-styles"></style>
+  <link rel="stylesheet" href="/styles/main.css">
+  <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="/elements/elements.html">
+  <link rel="import" href="/styles/shared-styles.html">
+  <link rel="icon" href="/images/favicon.ico">
+
   <style>
     my-dots {
       position: absolute;
       bottom: 40px;
       right: 40px;
       z-index: 4;
+    }
+    #prev, #next {
+      position: absolute;
+      z-index: 4;
+    }
+    #prev {
+      bottom: 40px;
+      left: 40px;
+    }
+    #next {
+      bottom: 60px;
+      left: 40px;
     }
   </style>
 </head>
@@ -38,16 +52,17 @@
   <!-- <script src="scripts/app.js"> -->
   <script>
     var app = document.querySelector('#app');
-    document.addEventListener('my-dots-selected-changed', function(e) {
+    var body = document.querySelector('body');
+    body.addEventListener('my-dots-selected-changed', function(e) {
       console.log('listener for selected ', e);
       var values = e.detail;
       var goRight = values.newValue > values.oldValue;
       app.entryAnimation = goRight ?
         'slide-from-right-animation' :
-        'slide-from-left-animation'
+        'slide-from-left-animation';
       app.exitAnimation = goRight ?
         'slide-left-animation' :
-        'slide-right-animation'
+        'slide-right-animation';
       app.selected = values.newValue;
     });
     app.selected = 0;

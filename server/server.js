@@ -17,12 +17,12 @@ app.use(function (req, res, next) {
     next();
   } else {
     // SI NO HAY EXCEPCIONES ENVIAMOS index.html
-    res.sendFile('index.html', {root: './path/del/servidor'});
+    res.sendFile('index.html', {root: '../app/'});
   }
 });
 
-app.use(express.static('./path/del/servidor/'));
+app.use(express.static('../app/'));
 
-app.listen(process.env.PORT || 4001);
+app.listen(process.env.PORT || 5000);
 
-console.log('Server: http://localhost:4001');
+console.log('Server: http://localhost:5000');
