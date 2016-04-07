@@ -29,12 +29,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         border-radius: 50%;
         background-color: white;
       }
-
-
     </style>
 
     <template is="dom-repeat" items="{{items}}">
-        <div on-tap="_handleTap"></div>
+      <div on-tap="_handleTap"></div>
     </template>
 
   </template>
@@ -48,7 +46,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         properties: {
           items: {
             type: Array,
-            value: function () {
+            value: function() {
               return [];
             }
           },
@@ -59,8 +57,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           },
         },
 
-        _handleTap: function () {
-
+        _handleTap: function(e) {
+          var item = e.model.item;
+          var selectedIndex = this.items.indexOf(item);
+          if (this.selected !== selectedIndex) {
+            this.set('selected', selectedIndex)
+          }
+          console.log('_handleTap ', this.selected);
         }
 
       });

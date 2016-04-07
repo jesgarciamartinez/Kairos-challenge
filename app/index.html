@@ -9,13 +9,21 @@
   <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="elements/elements.html">
   <style is="custom-style" include="shared-styles"></style>
+  <style>
+    my-dots {
+      position: absolute;
+      bottom: 40px;
+      right: 40px;
+      z-index: 4;
+    }
+  </style>
 </head>
 
 <body unresolved>
   <template is="dom-bind" id="app">
     <firebase-collection order-by-key location="https://brilliant-inferno-8421.firebaseio.com/images" data="{{slides}}"></firebase-collection>
     <neon-animated-pages entry-animation=[[entryAnimation]] exit-animation=[[exitAnimation]] selected="[[selected]]">
-      <template is="dom-repeat" items="{{slides}}" as="slide">
+      <template is="dom-repeat" items="[[slides]]" as="slide">
         <neon-animatable>
           <img src="[[slide.src]]" alt="">
         </neon-animatable>
@@ -23,17 +31,17 @@
     </neon-animated-pages>
     <button id="prev" on-tap="_prev">previous</button>
     <button id="next" on-tap="_next">next</button>
-    <!-- <my-dots></my-dots> -->
+    <my-dots items="[[slides]]" selected={{selected}}></my-dots>
 
   </template>
 
   <!-- <script src="scripts/app.js"> -->
   <script>
     var app = document.querySelector('#app');
-    app.entryAnimation = 'slide-from-bottom-animation';
-    app.exitAnimation = 'slide-up-animation';
+    app.addEventListener('selected-changed', function () {
+      console.log('listener for selected ', app.selected);
+    });
     app.selected = 0;
-    // app.slides = [{src: '1'}, {src: '2'}]
     app._prev = function() {
       this.entryAnimation = 'slide-from-left-animation';
       this.exitAnimation = 'slide-right-animation';
