@@ -14,28 +14,56 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <template>
     <style>
       :host {
-        display: block;
+        display: flex;
+        flex-flow: row;
       }
+
+      :host[vertical] {
+        flex-direction: vertical;
+      }
+
+      div {
+        width: 16px;
+        height: 16px;
+        border: 2px solid black;
+        border-radius: 50%;
+        background-color: white;
+      }
+
+
     </style>
 
-    
+    <template is="dom-repeat" items="{{items}}">
+        <div on-tap="_handleTap"></div>
+    </template>
 
   </template>
   <script>
-  (function() {
-    'use strict';
+    (function() {
+      'use strict';
 
-    Polymer({
-      is: 'my-dots',
+      Polymer({
+        is: 'my-dots',
 
-      properties: {
-        foo: {
-          type: String,
-          value: 'my-dots',
-          notify: true
+        properties: {
+          items: {
+            type: Array,
+            value: function () {
+              return [];
+            }
+          },
+          selected: {
+            type: Number,
+            value: 0,
+            notify: true
+          },
+        },
+
+        _handleTap: function () {
+
         }
-      }
-    });
-  })();
+
+      });
+    })();
   </script>
 </dom-module>
