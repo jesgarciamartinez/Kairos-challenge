@@ -10,39 +10,22 @@
   <link rel="import" href="/elements/elements.html">
   <link rel="import" href="/styles/shared-styles.html">
   <link rel="icon" href="/images/favicon.ico">
-  <link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Coming+Soon' rel='stylesheet' type='text/css'>
 
-  <style>
-    my-dots {
-      position: absolute;
-      bottom: 40px;
-      right: 40px;
-      z-index: 4;
-    }
-
-    #prev,
-    #next {
-      position: absolute;
-      z-index: 4;
-    }
-
-    #prev {
-      bottom: 40px;
-      left: 40px;
-    }
-
-    #next {
-      bottom: 60px;
-      left: 40px;
-    }
-  </style>
 </head>
 
 <body unresolved>
+
   <template is="dom-bind" id="app">
+
     <paper-spinner id="spinner" alt="Loading slides" active></paper-spinner>
+
+    <h1>Kairos Challenge</h1>
+
+
+
     <firebase-collection order-by-key location="https://brilliant-inferno-8421.firebaseio.com/images" data="{{slides}}"></firebase-collection>
+
     <neon-animated-pages id="slider" entry-animation=[[entryAnimation]] exit-animation=[[exitAnimation]] selected="[[selected]]" on-track="_track">
       <template is="dom-repeat" items="[[slides]]" as="slide">
         <neon-animatable>
@@ -50,72 +33,15 @@
         </neon-animatable>
       </template>
     </neon-animated-pages>
+
     <button id="prev" on-tap="_prev">previous</button>
     <button id="next" on-tap="_next">next</button>
-    <my-dots items="[[slides]]" selected=[[selected]]></my-dots>
 
+    <my-dots items="[[slides]]" selected=[[selected]]></my-dots>
 
   </template>
 
-  <!-- <script src="scripts/app.js"> -->
-  <script>
-    var app = document.querySelector('#app');
-    var body = document.querySelector('body');
-
-    body.addEventListener('my-dots-selected-changed', function(e) {
-      console.log('listener for selected ', e);
-      var values = e.detail;
-      var goRight = values.newValue > values.oldValue;
-      app.entryAnimation = goRight ?
-        'slide-from-right-animation' :
-        'slide-from-left-animation';
-      app.exitAnimation = goRight ?
-        'slide-left-animation' :
-        'slide-right-animation';
-      app.selected = values.newValue;
-    });
-
-    var mutationObserverCallback = function () {
-      var spinner = document.querySelector('#spinner');
-      spinner.removeAttribute('active');
-    }
-
-    document.addEventListener('WebComponentsReady', function () {
-      var slider = document.querySelector('#slider');
-      var mutationObserver = new MutationObserver(mutationObserverCallback);
-      mutationObserver.observe(slider, {childList: true });
-    });
-
-    app.selected = 0;
-    app.entryAnimation = 'slide-from-right-animation';
-    app.exitAnimation = 'slide-left-animation';
-
-    app._prev = function() {
-      this.entryAnimation = 'slide-from-left-animation';
-      this.exitAnimation = 'slide-right-animation';
-      this.selected = this.selected === 0 ? 0 : (this.selected - 1);
-    }
-    app._next = function() {
-      this.entryAnimation = 'slide-from-right-animation';
-      this.exitAnimation = 'slide-left-animation';
-      var last = app.slides.length - 1;
-      this.selected = this.selected === last ? last : (this.selected + 1);
-    }
-    app._track = function(e) {
-      console.log('track ', e);
-      e.preventDefault();
-      var started = e.detail.state === 'start';
-      var goRight = e.detail.dx < 0;
-      if (started !== undefined) {
-        console.log('started ', started);
-        if (goRight) {
-          this._next();
-        }else {
-          this._prev();
-        }
-      }
-    }
-  </script>
+  <script src="scripts/app.js"></script>
 </body>
 
 </html>
