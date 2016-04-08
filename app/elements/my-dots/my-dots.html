@@ -24,13 +24,15 @@
         background-color: var(--my-dots-color, black);
         opacity: .2;
         cursor: pointer;
+        transition-property: background-color, opacity;
+        transition-duration: .3s;
+        transition-timing-function: ease-in-out;
         @apply(--my-dots-dots)
       }
 
       .iron-selected {
         background-color: var(--my-dots-selected-color, #edeef3);
         opacity: 1;
-        transition: background-color, opacity, .3s, ease-in-out;
         @apply(--my-dots-selected-dot)
       }
     </style>

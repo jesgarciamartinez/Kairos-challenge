@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="/styles/main.css">
   <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="/elements/elements.html">
-  <!-- <link rel="import" href="/styles/shared-styles.html"> -->
   <style is="custom-style" include="shared-styles"></style>
   <link rel="icon" href="/images/favicon.ico">
   <link href='https://fonts.googleapis.com/css?family=Coming+Soon' rel='stylesheet' type='text/css'>
@@ -19,13 +18,14 @@
 
   <template is="dom-bind" id="app">
 
-    <paper-spinner id="spinner" alt="Loading slides" active></paper-spinner>
-
     <img src="./images/logo.png" alt="Kairos Logo" id="logo" />
 
     <h1 id="header">Challenge</h1>
 
     <div id="slider">
+
+      <paper-spinner id="spinner" alt="Loading slides" active></paper-spinner>
+
 
       <firebase-collection order-by-key location="https://brilliant-inferno-8421.firebaseio.com/images" data="{{slides}}"></firebase-collection>
 

@@ -16,18 +16,16 @@
     });
 
 
-    page('/users/:name', function(data) {
-      app.route = 'user-info';
-      app.params = data.params;
+    page('/:page', function(data) {
+      app.route = data.params.page;
     });
 
     // 404
     page('*', function() {
-      console.log('404');
       page.redirect(app.baseUrl);
     });
 
-    // add #! before urls
+
     page({
       hashbang: false
     });
