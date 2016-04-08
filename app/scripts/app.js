@@ -23,19 +23,19 @@
     var last = app.slides.length - 1;
     this.selected = this.selected === last ? last : (this.selected + 1);
   };
-  app._track = function (e) {
+  app._track = debounce(function (e) {
     e.preventDefault();
     var started = e.detail.state === 'start';
     var goRight = e.detail.dx < 0;
     if (started !== undefined) {
-      console.log('started ', started);
+      console.log('started ', started, goRight);
       if (goRight) {
         this._next();
       } else {
         this._prev();
       }
     }
-  };
+  }.bind(app), 250, true);
 
   var body = document.querySelector('body');
   body.addEventListener('my-dots-selected-changed', function (e) {
@@ -52,12 +52,35 @@
   });
 
   window.addEventListener('WebComponentsReady', function () {
-    var slider = document.querySelector('#slider');
+    var pages = document.querySelector('#pages');
     var mutationObserver = new MutationObserver(mutationObserverCallback);
-    mutationObserver.observe(slider, {childList: true });
+    mutationObserver.observe(pages, {
+      childList: true
+    });
   });
 
   var mutationObserverCallback = function () {
-    document.querySelector('#spinner').removeAttribute('active');
+    document.querySelector('#spinner')
+      .removeAttribute('active');
   };
+
+  app.year = new Date()
+    .getFullYear();
+
+  function debounce (func, wait, immediate) {
+    var timeout;
+    return function () {
+      var context = this,
+        args = arguments;
+      var later = function () {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      var callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
+  }
+
 })(document);

@@ -1,12 +1,13 @@
 {
   "images": {
     "image0": {
-      "index": "0",
-      "src": "http://kairosds.com/wp-content/uploads/2015/06/kairos-digital-solutions-logo.png"
+      "src": "http://weknowyourdreamz.com/images/minions/minions-01.jpg"
     },
     "image1": {
-      "index": "1",
-      "src": "http://kairosds.com/wp-content/uploads/revslider/kairos-digital-service/kairosds-soluciones-digitales.jpg"
+      "src": "http://mooshworld.com/wp-content/uploads/2014/11/1.jpg"
+    },
+    "image2": {
+      "src": "http://www.losminions-lapelicula.es/images/shareimage.jpg"
     }
   }
 }

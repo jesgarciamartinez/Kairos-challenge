@@ -8,7 +8,8 @@
   <link rel="stylesheet" href="/styles/main.css">
   <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="/elements/elements.html">
-  <link rel="import" href="/styles/shared-styles.html">
+  <!-- <link rel="import" href="/styles/shared-styles.html"> -->
+  <style is="custom-style" include="shared-styles"></style>
   <link rel="icon" href="/images/favicon.ico">
   <link href='https://fonts.googleapis.com/css?family=Coming+Soon' rel='stylesheet' type='text/css'>
 
@@ -20,26 +21,35 @@
 
     <paper-spinner id="spinner" alt="Loading slides" active></paper-spinner>
 
-    <h1>Kairos Challenge</h1>
+    <img src="./images/logo.png" alt="Kairos Logo" id="logo" />
 
+    <h1 id="header">Challenge</h1>
 
+    <div id="slider">
 
-    <firebase-collection order-by-key location="https://brilliant-inferno-8421.firebaseio.com/images" data="{{slides}}"></firebase-collection>
+      <firebase-collection order-by-key location="https://brilliant-inferno-8421.firebaseio.com/images" data="{{slides}}"></firebase-collection>
 
-    <neon-animated-pages id="slider" entry-animation=[[entryAnimation]] exit-animation=[[exitAnimation]] selected="[[selected]]" on-track="_track">
-      <template is="dom-repeat" items="[[slides]]" as="slide">
-        <neon-animatable>
-          <img src="[[slide.src]]" alt="">
-        </neon-animatable>
-      </template>
-    </neon-animated-pages>
+      <neon-animated-pages id="pages" entry-animation=[[entryAnimation]] exit-animation=[[exitAnimation]] selected="[[selected]]" on-track="_track">
+        <template is="dom-repeat" items="[[slides]]" as="slide">
+            <img src="[[slide.src]]" alt="">
+        </template>
+      </neon-animated-pages>
 
-    <button id="prev" on-tap="_prev">previous</button>
-    <button id="next" on-tap="_next">next</button>
+      <div id="prev" on-tap="_prev">previous</div>
+      <div id="next" on-tap="_next">next</div>
+    </div>
 
     <my-dots items="[[slides]]" selected=[[selected]]></my-dots>
 
+    <footer>
+      <p>
+        <small>
+            &copy; [[year]], made by <a href="https://es.linkedin.com/in/jesgarciamartinez">Jesús García</a> for <a href="http://kairosds.com">Kairos</a>.
+        </small>
+      </p>
+    </footer>
   </template>
+
 
   <script src="scripts/app.js"></script>
 </body>
