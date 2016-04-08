@@ -43,7 +43,8 @@ my-dots {
   position: absolute;
   z-index: 4;
   cursor: pointer;
-  font-size: 1.5rem;
+  font-size: 2rem;
+  font-weight: 700;
 }
 
 #prev {
@@ -60,4 +61,8 @@ footer {
   height: auto;
   margin: 0 auto;
   text-align: center;
+}
+
+footer a {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
 }
