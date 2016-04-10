@@ -9,11 +9,12 @@
 
       iron-selector {
         display: flex;
-        flex-flow: row;
+        flex-flow: row nowrap;
+        
       }
 
-      :host[vertical] {
-        flex-direction: vertical;
+      :host[vertical] iron-selector {
+        flex-direction: column;
       }
 
       div {

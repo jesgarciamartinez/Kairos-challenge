@@ -7,9 +7,12 @@ body {
 
 my-dots {
   position: absolute;
-  left: 47%;
   bottom: 8%;
   z-index: 4;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
 }
 
 #logo {
@@ -31,29 +34,42 @@ my-dots {
   padding: 0 80px;
   margin: auto;
   box-sizing: border-box;
+
+  /*for my-dots*/
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+#pages {
+  overflow: hidden;
 }
 
 #slider img {
   width: 100%;
   height: auto;
-
 }
 
 #prev, #next {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   position: absolute;
+  height: 100%;
+  top: 0;
   z-index: 4;
   cursor: pointer;
   font-size: 2rem;
   font-weight: 700;
 }
 
+#prev:hover, #next:hover {}
+
 #prev {
-  top: 50%;
   left: 5%;
 }
 
 #next {
-  top: 50%;
   right: 5%;
 }
 

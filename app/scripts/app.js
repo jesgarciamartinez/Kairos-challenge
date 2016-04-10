@@ -62,6 +62,10 @@
   var mutationObserverCallback = function () {
     document.querySelector('#spinner')
       .removeAttribute('active');
+
+    // fix pages having no height
+    var sliderHeight = document.querySelector('#slider').getBoundingClientRect().height;
+    document.querySelector('#pages').style.height = sliderHeight + 'px';
   };
 
   app.year = new Date()
