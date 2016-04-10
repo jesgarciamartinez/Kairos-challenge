@@ -16,9 +16,12 @@ my-dots {
 }
 
 #logo {
-  width: 200px;
   height: auto;
   margin: 0 auto;
+}
+
+#logo img {
+  width: 200px;
 }
 
 #header {
