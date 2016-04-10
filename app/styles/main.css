@@ -37,7 +37,6 @@ my-dots {
   padding: 0 80px;
   margin: auto;
   box-sizing: border-box;
-
   /*for my-dots*/
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
@@ -64,16 +63,23 @@ my-dots {
   cursor: pointer;
   font-size: 2rem;
   font-weight: 700;
+  width: 4rem;
 }
 
-#prev:hover, #next:hover {}
-
 #prev {
-  left: 5%;
+  left: 0;
 }
 
 #next {
-  right: 5%;
+  right: 0;
+}
+
+#prev:hover img {
+  animation: rotateLeft .5s steps(2) 0s 1 none running;
+}
+
+#next:hover img {
+  animation: rotateRight .5s steps(2) 0s 1 none running;
 }
 
 footer {
@@ -85,3 +91,52 @@ footer {
 footer a {
   font-family: Roboto, Helvetica, Arial, sans-serif;
 }
+
+footer small:nth-of-type(2) {
+  display: block;
+  font-size: .7rem;
+}
+
+@keyframes rotateRight {
+  0%, 50%, 100% {
+    transform: rotate(0deg);
+  }
+  25%, 75% {
+    transform: rotate(20deg);
+  }
+}
+
+@keyframes rotateLeft {
+  0%, 50%, 100% {
+    transform: rotate(0deg);
+  }
+  25%, 75% {
+    transform: rotate(-20deg);
+  }
+}
+
+
+/*my-dots div {
+  animation-name: bounceIn;
+  animation-delay: .5s;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+@keyframes bounceIn {
+  from, 20%, 40%, 60%, 80%, to {
+    animation-timing-function: cubic-bezier(0.11, 0.84, 0.32, 1.000);
+  }
+  0% {
+    opacity: 0;
+    transform: scale3d(.3, .3, .3);
+  }
+  70% {
+    transform: scale3d(1.02, 1.02, 1.02);
+  }
+  to {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}*/

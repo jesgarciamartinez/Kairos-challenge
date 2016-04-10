@@ -35,8 +35,8 @@
         </template>
       </neon-animated-pages>
 
-      <div id="prev" on-tap="_prev"><span>previous</span></div>
-      <div id="next" on-tap="_next"><span>next</span></div>
+      <div id="prev" on-tap="_prev"><img src="./images/arrow-left.png" alt="Left arrow"/></div>
+      <div id="next" on-tap="_next"><img src="./images/arrow-right.png" alt="Right arrow"/></div>
     </div>
 
     <my-dots items="[[slides]]" selected=[[selected]]></my-dots>
@@ -45,6 +45,9 @@
       <p>
         <small>
             &copy; [[year]], made by <a href="https://es.linkedin.com/in/jesgarciamartinez"><span>Jesús García</span></a> for <a href="http://kairosds.com">Kairos</a>.
+        </small>
+        <small>
+          Arrow icons by <a href="https://www.iconfinder.com/HardTask1">Hard Task</a>.
         </small>
       </p>
     </footer>
