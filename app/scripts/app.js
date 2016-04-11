@@ -50,6 +50,18 @@
     app.selected = values.newValue;
   });
 
+  // accessibility - arrow keys
+  document.addEventListener('keydown', function (e) {
+    if (document.activeElement.id === 'slider') {
+      if (e.code === 'ArrowLeft') {
+        app._prev();
+      }
+      else if (e.code === 'ArrowRight') {
+        app._next();
+      }
+    }
+  });
+
   window.addEventListener('WebComponentsReady', function () {
     var pages = document.querySelector('#pages');
     var mutationObserver = new MutationObserver(mutationObserverCallback);
@@ -67,7 +79,9 @@
     var pages = document.querySelector('#pages');
     pages.style.height = sliderRect.height + 'px';
 
-    // make wide images 100% width, tall images 100% height
+    // make wide images 100% width, tall images 100% height.
+    // This does not work when resized. Setting transform: translate instead of top and left
+    //  would be better but clashes with neon-animated-pages.
 
     var imgs = [].slice.call(document.querySelectorAll('#pages img'));
     imgs.forEach(function (img) {
