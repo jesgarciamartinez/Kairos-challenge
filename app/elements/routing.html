@@ -8,16 +8,16 @@
     }
 
     page('/', function() {
-      app.route = '0';
+      app.selected = '0';
     });
 
     page(app.baseUrl, function() {
-      app.route = '0';
+      app.selected = '0';
     });
 
 
-    page('/:page', function(data) {
-      app.route = data.params.page;
+    page('/:page', function(ctx) {
+      app.selected = ctx.params.page;
     });
 
     // 404
