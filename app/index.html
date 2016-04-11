@@ -29,7 +29,7 @@
 
       <firebase-collection order-by-key location="https://brilliant-inferno-8421.firebaseio.com/images" data="{{slides}}"></firebase-collection>
 
-      <neon-animated-pages id="pages" entry-animation=[[entryAnimation]] exit-animation=[[exitAnimation]] selected="[[selected]]" on-track="_track">
+      <neon-animated-pages id="pages" entry-animation=[[entryAnimation]] exit-animation=[[exitAnimation]] selected="[[selected]]" on-track="_track" on-wheel="_wheel">
         <template is="dom-repeat" items="[[slides]]" as="slide">
             <img src="[[slide.src]]" alt="">
         </template>

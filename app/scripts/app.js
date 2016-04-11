@@ -24,6 +24,7 @@
     var last = app.slides.length - 1;
     this.selected = this.selected === last ? 0 : (this.selected + 1);
   };
+
   app._track = debounce(function (e) {
     e.preventDefault();
     var started = e.detail.state === 'start';
@@ -34,6 +35,15 @@
       } else {
         this._prev();
       }
+    }
+  }.bind(app), 250, true);
+
+  app._wheel = debounce(function (e) {
+    e.preventDefault();
+    if (e.wheelDeltaX < 0) {
+      this._next();
+    } else {
+      this._prev();
     }
   }.bind(app), 250, true);
 
