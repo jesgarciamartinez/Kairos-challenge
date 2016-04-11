@@ -8,16 +8,16 @@
     }
 
     page('/', function() {
-      app.selected = '0';
+      app.selected = 0;
     });
 
     page(app.baseUrl, function() {
-      app.selected = '0';
+      app.selected = 0;
     });
 
 
     page('/:page', function(ctx) {
-      app.selected = ctx.params.page;
+      app.selected = parseInt(ctx.params.page, 10);
     });
 
     // 404
