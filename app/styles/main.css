@@ -49,6 +49,27 @@ my-dots {
   overflow: hidden;
 }
 
+/*Isaac's way of smoothing the edges :)*/
+#pages:after, #pages:before {
+  content: '';
+  top: 0;
+  bottom: 0;
+  width: 32px;
+  position: absolute;
+}
+
+#pages:after {
+  background: linear-gradient(to left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+  right: 0;
+}
+
+#pages:before {
+  background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+  left: 0;
+  z-index: 1;
+}
+/**/
+
 #prev, #next {
   display: flex;
   flex-direction: column;
@@ -75,8 +96,6 @@ my-dots {
 #next {
   right: 0;
 }
-
-
 
 #prev:hover img {
   animation: rotateLeft .5s steps(2) 0s 1 none running;
@@ -119,6 +138,7 @@ footer small:nth-of-type(2) {
   }
 }
 
+
 /*https://daneden.github.io/animate.css/*/
 
 @keyframes bounceInDown {
@@ -126,29 +146,24 @@ footer small:nth-of-type(2) {
     -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
     animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
   }
-
   0% {
     opacity: 0;
     -webkit-transform: translate3d(0, -3000px, 0);
     transform: translate3d(0, -3000px, 0);
   }
-
   60% {
     opacity: 1;
     -webkit-transform: translate3d(0, 25px, 0);
     transform: translate3d(0, 25px, 0);
   }
-
   75% {
     -webkit-transform: translate3d(0, -10px, 0);
     transform: translate3d(0, -10px, 0);
   }
-
   90% {
     -webkit-transform: translate3d(0, 5px, 0);
     transform: translate3d(0, 5px, 0);
   }
-
   to {
     -webkit-transform: none;
     transform: none;
