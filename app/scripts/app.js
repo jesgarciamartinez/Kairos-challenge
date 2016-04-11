@@ -5,7 +5,7 @@
 
   app.baseUrl = '/';
   if (window.location.port === '') { // if production
-    app.baseUrl = '/kairos-challenge/';
+    // app.baseUrl = '/kairos-challenge/';
   }
 
   app.selected = 0;
