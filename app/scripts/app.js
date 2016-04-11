@@ -15,13 +15,14 @@
   app._prev = function () {
     this.entryAnimation = 'slide-from-left-animation';
     this.exitAnimation = 'slide-right-animation';
-    this.selected = this.selected === 0 ? 0 : (this.selected - 1);
+    var last = app.slides.length - 1;
+    this.selected = this.selected === 0 ? last : (this.selected - 1);
   };
   app._next = function () {
     this.entryAnimation = 'slide-from-right-animation';
     this.exitAnimation = 'slide-left-animation';
     var last = app.slides.length - 1;
-    this.selected = this.selected === last ? last : (this.selected + 1);
+    this.selected = this.selected === last ? 0 : (this.selected + 1);
   };
   app._track = debounce(function (e) {
     e.preventDefault();
@@ -76,7 +77,6 @@
 
         var imgHeight = pages.getBoundingClientRect().width * img.naturalHeight / img.naturalWidth;
         var imgPos = sliderRect.height / 2 - imgHeight / 2;
-        console.log(imgPos);
         img.style.top = imgPos + 'px';
       } else {
         img.style.height = '100%';
