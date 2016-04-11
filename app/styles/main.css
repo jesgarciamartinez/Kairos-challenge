@@ -39,7 +39,7 @@ my-dots {
   padding: 0 80px;
   margin: auto;
   box-sizing: border-box;
-  /*for my-dots*/
+  /*for my-dots and images*/
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
   transform-style: preserve-3d;
@@ -49,10 +49,10 @@ my-dots {
   overflow: hidden;
 }
 
-#slider img {
+/*#slider img {
   width: 100%;
   height: auto;
-}
+}*/
 
 #prev, #next {
   display: flex;
@@ -68,6 +68,11 @@ my-dots {
   width: 4rem;
 }
 
+#prev img, #next img {
+  width: 100%;
+  height: auto;
+}
+
 #prev {
   left: 0;
 }
@@ -75,6 +80,8 @@ my-dots {
 #next {
   right: 0;
 }
+
+
 
 #prev:hover img {
   animation: rotateLeft .5s steps(2) 0s 1 none running;
