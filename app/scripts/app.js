@@ -17,12 +17,14 @@
     this.exitAnimation = 'slide-right-animation';
     var last = app.slides.length - 1;
     this.selected = this.selected === 0 ? last : (this.selected - 1);
+    page.show(app.baseUrl + this.selected);
   };
   app._next = function () {
     this.entryAnimation = 'slide-from-right-animation';
     this.exitAnimation = 'slide-left-animation';
     var last = app.slides.length - 1;
     this.selected = this.selected === last ? 0 : (this.selected + 1);
+    page.show(app.baseUrl + this.selected);
   };
 
   app._track = debounce(function (e) {
@@ -58,6 +60,7 @@
       'slide-left-animation' :
       'slide-right-animation';
     app.selected = values.newValue;
+    page.show(app.baseUrl + this.selected);
   });
 
   // accessibility - arrow keys
