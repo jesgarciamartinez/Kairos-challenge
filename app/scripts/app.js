@@ -60,7 +60,7 @@
       'slide-left-animation' :
       'slide-right-animation';
     app.selected = values.newValue;
-    page.show(app.baseUrl + this.selected);
+    page.show(app.baseUrl + app.selected);
   });
 
   // accessibility - arrow keys
